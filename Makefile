@@ -8,8 +8,8 @@ all:
 	@echo "Error: Build this on Windows."
 endif
 
-$(TARGET):
-	@$(CXX) $(SRC) -o $(TARGET)
+$(TARGET):	$(SRC)
+	@$(CXX) $^ -o $@
 
 clean:
 	@$(RM) $(TARGET)

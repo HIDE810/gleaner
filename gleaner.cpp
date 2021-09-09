@@ -117,8 +117,12 @@ void Run() {
 
     system("cls");
     ShowMap();
+
     gotoxy(x, y);
-    std::cout << "M";
+    std::cout << "\e[32mM\e[37m";
+
+    gotoxy(ex, ey);
+    std::cout << "\e[31mE\e[37m";
 
     gotoxy(0, 19);
     std::cout << "Press any key to start." << std::endl;
@@ -177,11 +181,11 @@ void Run() {
             FindPath(ex, ey, x, y);
 
         gotoxy(x, y);
-        std::cout << "M";
+        std::cout << "\e[32mM\e[37m";
 
         map[ey][ex] = '.';
         gotoxy(ex, ey);
-        std::cout << ".";
+        std::cout << "\e[33m.\e[37m";
 
         if(frame%speedmod == 0 && walk_queue.size() != 0) {
             ex = walk_queue.back().x;
@@ -190,7 +194,7 @@ void Run() {
         }
 
         gotoxy(ex, ey);
-        std::cout << "E";
+        std::cout << "\e[31mE\e[37m";
 
         gotoxy(32, 1);
         std::cout << pts;
