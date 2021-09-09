@@ -119,16 +119,16 @@ void Run() {
     ShowMap();
 
     gotoxy(x, y);
-    std::cout << "\e[32mM\e[37m";
+    std::cout << "\e[32mM\e[m";
 
     gotoxy(ex, ey);
-    std::cout << "\e[31mE\e[37m";
+    std::cout << "\e[31mE\e[m";
 
     gotoxy(0, 19);
     std::cout << "Press any key to start." << std::endl;
     system("pause > nul");
 
-    std::cout << "\033[1A\033[2K" << std::endl;
+    std::cout << "\e[1A\e[2K" << std::endl;
 
     FindPath(ex, ey, x, y);
 
@@ -181,11 +181,11 @@ void Run() {
             FindPath(ex, ey, x, y);
 
         gotoxy(x, y);
-        std::cout << "\e[32mM\e[37m";
+        std::cout << "\e[32mM\e[m";
 
         map[ey][ex] = '.';
         gotoxy(ex, ey);
-        std::cout << "\e[33m.\e[37m";
+        std::cout << "\e[33m.\e[m";
 
         if(frame%speedmod == 0 && walk_queue.size() != 0) {
             ex = walk_queue.back().x;
@@ -194,7 +194,7 @@ void Run() {
         }
 
         gotoxy(ex, ey);
-        std::cout << "\e[31mE\e[37m";
+        std::cout << "\e[31mE\e[m";
 
         gotoxy(32, 1);
         std::cout << pts;
@@ -203,7 +203,7 @@ void Run() {
     }
 
     gotoxy(32, 1);
-    std::cout << "\033[0K";
+    std::cout << "\e[0K";
 
     gotoxy(0, 19);
     std::cout << "GAME OVER!!" << std::endl;
