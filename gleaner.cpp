@@ -1,3 +1,4 @@
+#include <algorithm>
 #include <iostream>
 #include <string>
 #include <vector>
@@ -116,6 +117,10 @@ void Run() {
     int speedmod = 3;
 
     system("cls");
+
+    for(auto& line : map)
+        std::replace(line.begin(), line.end(), '.', ' ');
+
     ShowMap();
 
     gotoxy(x, y);
@@ -207,10 +212,17 @@ void Run() {
 
     gotoxy(0, 19);
     std::cout << "GAME OVER!!" << std::endl;
-    std::cout << "Your score is " << pts << "!" << std::endl;
+    std::cout << "Your score is " << pts << "!" << std::endl << std::endl;
 }
 
 int main() {
-    Run();
+    while(1) {
+        Run();
+
+        std::cout << "Press Y to continue. ";
+
+        if(system("choice") == 2)
+            break;
+    }
     return 0;
 }
