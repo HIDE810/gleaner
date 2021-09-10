@@ -116,20 +116,26 @@ void Run() {
     int frame = 0;
     int speedmod = 3;
 
+    const int margin = 4;
+
     system("cls");
 
     for(auto& line : map)
         std::replace(line.begin(), line.end(), '.', ' ');
 
+    std::cout << "Gleaner v1.0" << std::endl << std::endl;
+    std::cout << "\e[32mM\e[m: You, \e[31mE\e[m: Enemy" << std::endl << std::endl;
+
+    gotoxy(0, 0 + margin);
     ShowMap();
 
-    gotoxy(x, y);
+    gotoxy(x, y + margin);
     std::cout << "\e[32mM\e[m";
 
-    gotoxy(ex, ey);
+    gotoxy(ex , ey + margin);
     std::cout << "\e[31mE\e[m";
 
-    gotoxy(0, 19);
+    gotoxy(0, 19 + margin);
     std::cout << "Press any key to start." << std::endl;
     system("pause > nul");
 
@@ -143,7 +149,7 @@ void Run() {
         else if(pts >= 100)
             speedmod = 1;
 
-        gotoxy(x, y);
+        gotoxy(x, y + margin);
         std::cout << " ";
 
         old_x = x;
@@ -185,11 +191,11 @@ void Run() {
         if(old_x != x || old_y != y)
             FindPath(ex, ey, x, y);
 
-        gotoxy(x, y);
+        gotoxy(x, y + margin);
         std::cout << "\e[32mM\e[m";
 
         map[ey][ex] = '.';
-        gotoxy(ex, ey);
+        gotoxy(ex, ey + margin);
         std::cout << "\e[33m.\e[m";
 
         if(frame%speedmod == 0 && walk_queue.size() != 0) {
@@ -198,19 +204,19 @@ void Run() {
             walk_queue.pop_back();
         }
 
-        gotoxy(ex, ey);
+        gotoxy(ex, ey + margin);
         std::cout << "\e[31mE\e[m";
 
-        gotoxy(32, 1);
+        gotoxy(32, 1 + margin);
         std::cout << pts;
         Sleep(100);
         frame++;
     }
 
-    gotoxy(32, 1);
+    gotoxy(32, 1 + margin);
     std::cout << "\e[0K";
 
-    gotoxy(0, 19);
+    gotoxy(0, 19 + margin);
     std::cout << "GAME OVER!!" << std::endl;
     std::cout << "Your score is " << pts << "!" << std::endl << std::endl;
 }
